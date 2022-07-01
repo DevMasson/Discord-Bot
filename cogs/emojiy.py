@@ -2,7 +2,7 @@ import nextcord
 from nextcord import slash_command, Interaction
 from nextcord.ext import commands
 
-class Fun(commands.Cog):
+class Emojify(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -28,4 +28,4 @@ class Fun(commands.Cog):
         await ctx.response.send_message(f"{' '.join(emojis)}")
 
 def setup(client):
-    client.add_cog(Fun(client))
+    client.add_cog(Emojify(client))

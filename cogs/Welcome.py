@@ -18,6 +18,5 @@ async def on_member_join(member):
     await asyncio.sleep(30)
     await msg.delete()
 
-
 def setup(client):
     client.add_cog(Welcome(client))
