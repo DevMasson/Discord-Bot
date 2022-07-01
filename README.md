@@ -28,6 +28,5 @@ Roadmap
 Links
 ------
 
-- `Servidor Discord <https://discord.gg/mestredanoite>`_
-- `Site do Servidor <https://v-rising.vercel.app>`_
-- `Discord API <https://discord.gg/discord-api>`_
+- `[Servidor Discord](https://discord.gg/mestredanoite)`
+- `[Site do Servidor](https://v-rising.vercel.app)`
