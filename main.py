@@ -13,10 +13,10 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 
 @bot.event
 async def on_ready(self):
-    # await self.wait_until_ready()
-    # if not self.synced:
-    #     await bot.sync(guild = Object(id=config.guild_id))
-    #     self.synced = True
+    await self.wait_until_ready()
+    if not self.synced:
+        await bot.sync(guild = Object(id=config.guild_id))
+        self.synced = True
     print("----------------------------")
     print(f"{bot.user} is online...")
     print("----------------------------")
