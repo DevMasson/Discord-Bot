@@ -7,6 +7,7 @@ Roadmap
 - [ ] Server Status (Member Count, Role Count, Info)
 - [ ] Modal Embed Builder
 - [ ] Modal Ban Builder
+- [ ] Sistema de Logs (Logs de Comandos, Logs de Erros, Logs de Usuários)
 - [ ] Sistema de Vendas (Bot Loja)
 - [ ] Sistema de Tickets com Menu e Threads
 - [ ] Sistema de E-Commerce (Pix)

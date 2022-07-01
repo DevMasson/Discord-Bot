@@ -3,7 +3,7 @@ from nextcord import slash_command, Interaction, Embed
 from nextcord.ext import commands
 from main import * 
 
-class Reload(commands.Cog):
+class ReloadCommand(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.colour = 0x4555ff
@@ -19,4 +19,4 @@ class Reload(commands.Cog):
         await ctx.send(embed=embed)
 
 def setup(client):
-    client.add_cog(Reload(client))
+    client.add_cog(ReloadCommand(client))

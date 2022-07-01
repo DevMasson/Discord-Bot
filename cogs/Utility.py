@@ -9,7 +9,6 @@ class Utility(commands.Cog):
         self.client = client
         self.colour = 0x4555ff
 
-
     @slash_command(name='server-info', description='Server information!', guild_ids=[983506417292017704])
     async def server_info(self, ctx: Interaction):
         role_count = len(ctx.guild.roles)
@@ -24,7 +23,6 @@ class Utility(commands.Cog):
         embed.add_field(name='Top role', value=ctx.guild.roles[-2])
         embed.add_field(name='Guild created', value=ctx.guild.created_at)
         await ctx.response.send_message(embed=embed)
-
 
     @slash_command(name='user-info', description='See information of the mentioned user', guild_ids=[983506417292017704])
     async def user_info(self, ctx:Interaction, member: nextcord.Member = nextcord.SlashOption(name='member', description='Mention a user', required=False)):
@@ -79,7 +77,6 @@ class Utility(commands.Cog):
         else:
             await channel.send(embed=embed)
             await ctx.response.send_message(f"Embed sent to {channel}")
-
     class PuniçãoModal(ui.Modal, title= "Relatório de Punição"):
         nome = ui.TextInput(label="Nome do usuário:", style = nextcord.TextInput.style.short, placeholder="Mestre da Noite", required=True)
         steamid = ui.TextInput(label="SteamID do usuário:", style = nextcord.TextInput.style.short, placeholder="7656981100002", required=True)
@@ -97,12 +94,6 @@ class Utility(commands.Cog):
             embed.add_field(name='**PUNIÇÃO:**', value=f"Tempo: {self.punicao} dia(s) \nInicio: {datetime.now()} \nFim: {final}", inline=True)
             await ctx.send(embed=embed)
             await ctx.response.send_message("Punição enviada com sucesso!")
-
-    @slash_command(name='punição', description='Envia relatório de punição', guild_ids=[983506417292017704])
-    async def punicao(ctx:Interaction):
-        await ctx.response.send_modal(modal=PunicãoModal())
-
-
 
 def setup(client):
     client.add_cog(Utility(client))

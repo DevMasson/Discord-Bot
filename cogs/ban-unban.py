@@ -2,7 +2,7 @@ import nextcord
 from nextcord import slash_command, Interaction
 from nextcord.ext import commands
 
-class Ban(commands.Cog):
+class BanUnban(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -29,4 +29,4 @@ class Ban(commands.Cog):
         await ctx.response.send_message(f"{member} foi desbanido por {ctx.user.mention}.")
 
 def setup(client):
-    client.add_cog(Ban(client))
+    client.add_cog(BanUnban(client))

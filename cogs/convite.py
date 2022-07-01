@@ -1,4 +1,4 @@
-import nextcord, config
+import nextcord
 from nextcord import slash_command, Interaction, Embed
 from nextcord.ext import commands
 
