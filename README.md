@@ -1,18 +1,18 @@
 # Ajudante da Noite Discord Bot
 
-Ajudante Da Noite
---------
-
 Um bot Discord moderno, fácil de usar, rico em recursos e divertido.
 
-# ROADMAP
-[] Server Status (Member Count, Role Count, Info)
-[] Modal Embed Builder
-[] Modal Ban Builder
-[] Sistema de Vendas (Bot Loja)
-[] Sistema de Tickets com Menu e Threads
-[] Sistema de E-Commerce (Pix)
+### Roadmap
+-------------
+[ ] Server Status (Member Count, Role Count, Info)
+[ ] Modal Embed Builder
+[ ] Modal Ban Builder
+[ ] Sistema de Vendas (Bot Loja)
+[ ] Sistema de Tickets com Menu e Threads
+[ ] Sistema de E-Commerce (Pix)
 
+## Sistemas a Implementar
+-------------
 ### Sistema de E-Commerce (Pix)
 📁 Funcionalidades
 * Sistema de Cupom;
@@ -33,3 +33,4 @@ Links
 
 - `Servidor Discord <https://discord.gg/mestredanoite>`_
 - `Site do Servidor <https://v-rising.vercel.app>`_
+- `Discord API <https://discord.gg/discord-api>`_
