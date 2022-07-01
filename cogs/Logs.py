@@ -1,10 +1,7 @@
-import nextcord, config
+import nextcord, config, main
 from nextcord import slash_command, Interaction
 from nextcord.ext import commands
-
-intents = nextcord.Intents.default()
-intents.members = True
-bot = commands.Bot(command_prefix='$', intents=intents)
+from main import *
 
 class Logs(commands.Cog):
     def __init__(self, client):
