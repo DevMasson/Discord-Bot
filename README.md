@@ -24,6 +24,7 @@ Um bot Discord moderno, fácil de usar, rico em recursos e divertido.
 * Após clicar em comprar, será aberto um "ticket" que pode ser feito toda interação;
 * Após o pagamento ser aprovado, será enviado no "ticket" o arquivo do produto;
 * Tag de Cliente após o pagamento aprovado;
+
 Links
 ------
 
