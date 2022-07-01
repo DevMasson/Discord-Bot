@@ -2,7 +2,9 @@
 📄<br>Ajudante da Noite Discord Bot
 </h1>
 
-Um bot Discord moderno, fácil de usar, rico em recursos e divertido.
+<h3 align="center">
+<br>Um bot Discord moderno, fácil de usar, rico em recursos e divertido.
+</h3>
 
 Roadmap
 ------
