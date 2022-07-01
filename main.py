@@ -1,13 +1,22 @@
 import nextcord, config, os, asyncio
 from nextcord.ext import commands
-from nextcord import Embed, Interaction, slash_command
+from nextcord import Object
 
 intents = nextcord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='$', intents=intents)
 
+# class client(nextcord.Client):
+#     def __init__(self):
+#         super().__init__(intents=nextcord.Intents.default())
+#         self.synced = False #Nós usamos isso para o bot não sincronizar os comandos mais de uma vez
+
 @bot.event
-async def on_ready():
+async def on_ready(self):
+    # await self.wait_until_ready()
+    # if not self.synced:
+    #     await bot.sync(guild = Object(id=config.guild_id))
+    #     self.synced = True
     print("----------------------------")
     print(f"{bot.user} is online...")
     print("----------------------------")
