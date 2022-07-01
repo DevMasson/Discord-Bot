@@ -10,14 +10,6 @@ class Utility(commands.Cog):
         self.colour = 0x4555ff
 
 
-    @slash_command(name='ping', description='See bot ping!', guild_ids=[983506417292017704])
-    async def ping(
-        self,
-        ctx:Interaction
-    ):
-        await ctx.response.send_message(f"Pong {round(self.client.latency * 1000)}ms ! 🏓")
-
-
     @slash_command(name='server-info', description='Server information!', guild_ids=[983506417292017704])
     async def server_info(self, ctx: Interaction):
         role_count = len(ctx.guild.roles)
@@ -88,17 +80,6 @@ class Utility(commands.Cog):
             await channel.send(embed=embed)
             await ctx.response.send_message(f"Embed sent to {channel}")
 
-
-# Comando que mostra o link de convite do servidor!
-    @slash_command(name='convite', description='Mostra o link de convite do servidor', guild_ids=[983506417292017704])
-    async def convite(self, ctx:Interaction):
-        embed = Embed(title="<:external_link2:992246876948680784> **LINKS ÚTEIS**" ,colour=4092125, description="Informações relacionadas ao nosso servidor! 🇧🇷")
-        #embed.set_author(name= "🇧🇷 **MESTRE DA NOITE**", icon_url="https://media.discordapp.net/attachments/983506417732452362/992217430539640943/LOGO_DISCORD_MESTRE_DA_NOITE.png?width=605&height=605")
-        embed.set_thumbnail("https://media.discordapp.net/attachments/983506417732452362/992217430539640943/LOGO_DISCORD_MESTRE_DA_NOITE.png?width=605&height=605")
-        embed.add_field(name='_ _', value="<:discordround:983841913046179840> **[DISCORD](https://discord.gg/mestredanoite)**", inline=True)
-        embed.add_field(name='_ _', value=":globe_with_meridians: **[SITE](https://v-rising.vercel.app)**", inline=True)
-        await ctx.send(embed=embed)
-
     class PuniçãoModal(ui.Modal, title= "Relatório de Punição"):
         nome = ui.TextInput(label="Nome do usuário:", style = nextcord.TextInput.style.short, placeholder="Mestre da Noite", required=True)
         steamid = ui.TextInput(label="SteamID do usuário:", style = nextcord.TextInput.style.short, placeholder="7656981100002", required=True)
@@ -121,14 +102,7 @@ class Utility(commands.Cog):
     async def punicao(ctx:Interaction):
         await ctx.response.send_modal(modal=PunicãoModal())
 
-    @slash_command(name='reload', description='recarrega os cogs!', guild_ids=[983506417292017704], default_member_permissions=8)
-    async def reload(self, ctx:Interaction):
-        embed = Embed(title="**CONFIGURAÇÕES RECARREGADAS** <:1520blurplesettings:986095370922762300> " ,colour=4092125, description="Os comandos foram atualiados!! <:rules:983841920092614677>")
-        for fn in os.listdir('./cogs'):
-                if fn.endswith('.py'):
-                    bot.unload_extension(f'cogs.{fn[:-3]}')
-                    bot.load_extension(f"cogs.{fn[:-3]}")
-        await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Utility(client))
