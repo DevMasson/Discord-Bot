@@ -1,4 +1,6 @@
-# Ajudante da Noite Discord Bot
+<h1 align="center">
+📄<br>Ajudante da Noite Discord Bot
+</h1>
 
 Um bot Discord moderno, fácil de usar, rico em recursos e divertido.
 
@@ -10,14 +12,14 @@ Roadmap
 - [ ] Sistema de Vendas (Bot Loja)
 - [ ] Sistema de Tickets com Menu e Threads
 - [ ] Sistema de E-Commerce (Pix)
-### Sistema de E-Commerce (Pix)
+### 🏪 Sistema de E-Commerce (Pix)
 📁 Funcionalidades
 * Sistema de Cupom;
 * Sistema de receber produtos quando o pagamento for aprovado
 * Sistema de adicionar/remover produtos do carrinho
 * Sistema de solicitar reembolso automático
 * Pagamento via QR CODE (Pix);
-### Sistema de Vendas (Bot Loja) 
+### 🛒 Sistema de Vendas (Bot Loja) 
 📁 Funcionalidades
 * Embed para cada produto que for vender;
 * Sistema de cadastro de produtos/valor do produto pelo banco de dados;
@@ -28,5 +30,5 @@ Roadmap
 Links
 ------
 
-- `[Servidor Discord](https://discord.gg/mestredanoite)`
-- `[Site do Servidor](https://v-rising.vercel.app)`
+- [Servidor Discord](https://discord.gg/mestredanoite)
+- [Site do Servidor](https://v-rising.vercel.app)
