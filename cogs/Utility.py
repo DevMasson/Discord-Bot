@@ -77,13 +77,14 @@ class Utility(commands.Cog):
         else:
             await channel.send(embed=embed)
             await ctx.response.send_message(f"Embed sent to {channel}")
+
     # class PuniçãoModal(ui.Modal):
     #     nome = ui.TextInput(label="Nome do usuário:", style = nextcord.TextInputStyle.short, placeholder="Mestre da Noite", required=True)
     #     steamid = ui.TextInput(label="SteamID do usuário:", style = nextcord.TextInputStyle.short , placeholder="7656981100002", required=True)
     #     motivos = ui.TextInput(label="Motivos da Punição:", style = nextcord.TextInputStyle.short , placeholder="Teaming / Racismo / Hack", required=True)
     #     provas = ui.TextInput(label="Provas:", style = nextcord.TextInputStyle.short, placeholder="Videos e Prints no Discord", required=True)
     #     punicao = ui.TextInput(label="Tempo da Punição:", style = nextcord.TextInputStyle.short, placeholder="1", required=True)
-        
+
     #     async def on_submit(self, ctx:Interaction):
     #         final = datetime.now() - timedelta(days=int(self.punicao))
     #         embed =   Embed(title="**RELATÓRIO DE PUNIÇÃO 📝**" ,colour=4092125)
