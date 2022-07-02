@@ -77,23 +77,23 @@ class Utility(commands.Cog):
         else:
             await channel.send(embed=embed)
             await ctx.response.send_message(f"Embed sent to {channel}")
-    class PuniçãoModal(ui.Modal, title= "Relatório de Punição"):
-        nome = ui.TextInput(label="Nome do usuário:", style = nextcord.TextInput.style.short, placeholder="Mestre da Noite", required=True)
-        steamid = ui.TextInput(label="SteamID do usuário:", style = nextcord.TextInput.style.short, placeholder="7656981100002", required=True)
-        motivos = ui.TextInput(label="Motivos da Punição:", style = nextcord.TextInput.style.short, placeholder="Teaming / Racismo / Hack", required=True)
-        provas = ui.TextInput(label="Provas:", style = nextcord.TextInput.style.short, placeholder="Videos e Prints no Discord", required=True)
-        punicao = ui.TextInput(label="Tempo da Punição:", style = nextcord.TextInput.style.short, placeholder="1", required=True)
+    # class PuniçãoModal(ui.Modal):
+    #     nome = ui.TextInput(label="Nome do usuário:", style = nextcord.TextInputStyle.short, placeholder="Mestre da Noite", required=True)
+    #     steamid = ui.TextInput(label="SteamID do usuário:", style = nextcord.TextInputStyle.short , placeholder="7656981100002", required=True)
+    #     motivos = ui.TextInput(label="Motivos da Punição:", style = nextcord.TextInputStyle.short , placeholder="Teaming / Racismo / Hack", required=True)
+    #     provas = ui.TextInput(label="Provas:", style = nextcord.TextInputStyle.short, placeholder="Videos e Prints no Discord", required=True)
+    #     punicao = ui.TextInput(label="Tempo da Punição:", style = nextcord.TextInputStyle.short, placeholder="1", required=True)
         
-        async def on_submit(self, ctx:Interaction):
-            final = datetime.now() - timedelta(days=int(self.punicao))
-            embed =   Embed(title="**RELATÓRIO DE PUNIÇÃO 📝**" ,colour=4092125)
-            embed.add_field(name='**NOME:**', value=f"{self.nome}", inline=True)
-            embed.add_field(name='**STEAMID:**', value=f"{self.steamid}", inline=True)
-            embed.add_field(name='**MOTIVOS:**', value=f"{self.motivos}", inline=False)
-            embed.add_field(name='**PROVAS:**', value=f"{self.provas}", inline=True)
-            embed.add_field(name='**PUNIÇÃO:**', value=f"Tempo: {self.punicao} dia(s) \nInicio: {datetime.now()} \nFim: {final}", inline=True)
-            await ctx.send(embed=embed)
-            await ctx.response.send_message("Punição enviada com sucesso!")
+    #     async def on_submit(self, ctx:Interaction):
+    #         final = datetime.now() - timedelta(days=int(self.punicao))
+    #         embed =   Embed(title="**RELATÓRIO DE PUNIÇÃO 📝**" ,colour=4092125)
+    #         embed.add_field(name='**NOME:**', value=f"{self.nome}", inline=True)
+    #         embed.add_field(name='**STEAMID:**', value=f"{self.steamid}", inline=True)
+    #         embed.add_field(name='**MOTIVOS:**', value=f"{self.motivos}", inline=False)
+    #         embed.add_field(name='**PROVAS:**', value=f"{self.provas}", inline=True)
+    #         embed.add_field(name='**PUNIÇÃO:**', value=f"Tempo: {self.punicao} dia(s) \nInicio: {datetime.now()} \nFim: {final}", inline=True)
+    #         await ctx.send(embed=embed)
+    #         await ctx.response.send_message("Punição enviada com sucesso!")
 
 def setup(client):
     client.add_cog(Utility(client))
