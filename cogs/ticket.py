@@ -54,33 +54,33 @@ class StartTicket(ui.View):  # Botao de Atendimento
         label="➕Abrir Ticket",
         custom_id="StartTicketButton:callback",
      )
-
     async def callback(self,button:nextcord.ui.button, interaction: Interaction):
         self.value = True
         self.stop()
-        
-        
-        ticket = True 
+
+
+        ticket = True
         for thread in interaction.channel.threads:
             if f"{interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-                    
+
                 else:
                     ticket = False
-                    await interaction.response.send_message(ephemeral=True,content=f"Você já tem um pedido de atendimento em andamento!")
+                    await interaction.response.send_message(ephemeral=True, content="Você já tem um pedido de atendimento em andamento!")
+
                     return
-                
-                                
+
+
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Atendimento de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-                        
+
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket para você! {ticket.mention}")
             embed = Embed(title="📩  **|** Seu foi ticket criado!",
                       description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-   
+
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
         
@@ -102,33 +102,33 @@ class ReportTicket(ui.View):  # Botao de Report
         label="🚨Abrir Denúncia",
         custom_id="ReportTickerButton:callback",
      )
-
     async def callback(self,button:nextcord.ui.button, interaction: Interaction):
         self.value = True
         self.stop()
-        
-        
-        ticket = True 
+
+
+        ticket = True
         for thread in interaction.channel.threads:
             if f"Ticket de Denúncia de {interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-                    
+
                 else:
                     ticket = False
-                    await interaction.response.send_message(ephemeral=True,content=f"Você já tem um ticket de denúncia em andamento!")
+                    await interaction.response.send_message(ephemeral=True, content="Você já tem um ticket de denúncia em andamento!")
+
                     return
-                
-                                
+
+
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Ticket de Denúncia de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-                        
+
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket para você! {ticket.mention}")
             embed = Embed(title="🚨  **|** Seu pedido de Denúncia foi aberto!",
                       description='Envie todas as informações e provas possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-   
+
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
 
@@ -147,33 +147,33 @@ class SuggestionTicket(ui.View):  # Botao de Sugestão
         label="💡 Indicar Sugestão",
         custom_id="SuguestaoButton:callback",
      )
-
     async def callback(self,button:nextcord.ui.button, interaction: Interaction):
         self.value = True
         self.stop()
-        
-        
-        ticket = True 
+
+
+        ticket = True
         for thread in interaction.channel.threads:
             if f"Sugestão de {interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-                    
+
                 else:
                     ticket = False
-                    await interaction.response.send_message(ephemeral=True,content=f"Você já tem um ticket de sugestão em andamento!")
+                    await interaction.response.send_message(ephemeral=True, content="Você já tem um ticket de sugestão em andamento!")
+
                     return
-                
-                                
+
+
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Sugestão de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-                        
+
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket de sugestão para você! {ticket.mention}")
             embed = Embed(title="💡   **|** Seu pedido sugestão foi aberto!",
                       description='Envie todas as informações possíveis sobre sua sugestão e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-   
+
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
 
