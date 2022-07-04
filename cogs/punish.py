@@ -27,6 +27,7 @@ class PunishModal(ui.Modal):
         self.add_item(self.emPunishment)
         
     async def callback(self, interaction: Interaction):
+        # sourcery skip: use-datetime-now-not-today
    
         name = self.emName.value
         userid = self.emID.value
@@ -42,11 +43,11 @@ class PunishModal(ui.Modal):
         banDate = datetime.today().strftime('%d/%m/%Y')
         embed = Embed(title="**RELATÓRIO DE PUNIÇÃO 📝**" ,colour=0x5c0412)
         embed.add_field(name='**NOME:**', value=f"{name}", inline=False)
-        embed.add_field(name='**STEAMID:*', value=f"{userid}", inline=False)
+        embed.add_field(name='**STEAMID:**', value=f"{userid}", inline=False)
         embed.add_field(name='**MOTIVOS:**', value=f"{reasons}", inline=False)
         embed.add_field(name='**PROVAS:**', value=f"{evidences}", inline=False)
         if punishment == 'Permanente':
-            embed.add_field(name='**PUNIÇÃO:**', value=f"Tempo: Permanente!", inline=False)
+            embed.add_field(name='**PUNIÇÃO:**', value="Tempo: Permanente!", inline=False)
         else:
             embed.add_field(name='**PUNIÇÃO:**', value=f"Tempo: {punishment} dia(s) \n\nInicio: {banDate} \n\nFim: {finalDate.strftime('%d/%m/%Y')}", inline=False)
 
