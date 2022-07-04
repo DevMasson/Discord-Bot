@@ -1,9 +1,9 @@
-import nextcord, os, main
+import nextcord, os
 from nextcord import slash_command, SlashOption, Interaction, Embed, SelectOption, ui
 from nextcord.ext import commands
 from nextcord.ui import Button, View
 from datetime import datetime, timedelta, date
-from main import * 
+import config
 
 
 

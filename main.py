@@ -1,19 +1,22 @@
-
 import nextcord, config, os, asyncio
 from nextcord.ext import commands
 from nextcord import Object
+from cogs.ticket import DropdownView
 
+
+class Bot(commands.Bot): 
+     def __init__(self, *args, **kwargs): 
+         super().__init__(*args, **kwargs) 
+         self.persistent_views_added = False
 
 intents = nextcord.Intents.default()
 intents.members = True
-
-bot = commands.Bot(command_prefix='$', intents=intents)
+bot = Bot(command_prefix='$', intents=intents)
 
 # class client(nextcord.Client):
 #     def __init__(self):
 #         super().__init__(intents=nextcord.Intents.default())
-#         self.synced = False #Nós usamos isso para o bot não sincronizar os comandos mais de uma vez
-
+#         self.synced = False #Nós usamos isso para o bot não sincronizar os comandos mais de uma ve
 
 @bot.event
 async def on_ready():

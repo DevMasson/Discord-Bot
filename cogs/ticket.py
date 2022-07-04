@@ -1,8 +1,9 @@
-import nextcord, os, main
+import nextcord, os
 from nextcord import slash_command, SlashOption, Interaction, Embed, SelectOption, ui
 from nextcord.ext import commands
 from nextcord.ui import Button, View
-from main import * 
+import config
+import asyncio
 
 
 
@@ -13,7 +14,7 @@ class Dropdown(nextcord.ui.Select):
             SelectOption(label="Atendimento", value="atendimento", emoji="📨"),  
             SelectOption(label="Denúncia", value="denuncia", emoji="🚨"),
             SelectOption(label="Sugestão", value="sugestao", emoji="💡"),
-            SelectOption(label="Compras", value="compras", emoji="🛒"),
+            SelectOption(label="Compras", value="compras", emoji="🛒")
         ]
         super().__init__(
             placeholder="Selecione uma opção...",
@@ -39,6 +40,7 @@ class DropdownView(ui.View):
     def __init__(self): 
         super().__init__(timeout=None)
         self.add_item(Dropdown())
+
 
 
 class StartTicket(ui.View):  # Botao de Atendimento
@@ -81,10 +83,10 @@ class StartTicket(ui.View):  # Botao de Atendimento
                       description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!', 
                       colour=self.colour)
             
-            await ticket.send(f"{interaction.user.mention}")
             await ticket.send(embed=embed, view=CloseButton())
+            await ticket.send(f"{interaction.user.mention}")
             
-            tag = await ticket.send(f"{config.owner_roleID}{config.admin_roleID}{config.sup_roleID}")
+            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
             await asyncio.sleep(1)
             await tag.delete()
             
@@ -136,6 +138,9 @@ class ReportTicket(ui.View):  # Botao de Report
 
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
+            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await asyncio.sleep(1)
+            await tag.delete()
 
 
 class SuggestionTicket(ui.View):  # Botao de Sugestão
@@ -225,6 +230,9 @@ class BuyButton(ui.View):  # Botao de Sugestão
 
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
+            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await asyncio.sleep(1)
+            await tag.delete()
 
             print(interaction.data)
 class BuyButton(ui.View):  # Botao de Sugestão
@@ -264,9 +272,13 @@ class BuyButton(ui.View):  # Botao de Sugestão
             embed = Embed(title="🛒   **|** Seu pedido carrinho foi aberto!",
                       description='Envie todas as informações possíveis sobre o que voce quer adquirir e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
+            
 
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
+            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await asyncio.sleep(1)
+            await tag.delete()
 class CloseButton(ui.View):  # Botao de Sugestão
     def __init__(self):
         super().__init__(timeout=None)
@@ -287,11 +299,9 @@ class CloseButton(ui.View):  # Botao de Sugestão
             await interaction.response.send_message(ephemeral=True, content="Fechando ticket...")
             await asyncio.sleep(2)
             await interaction.followup.send(ephemeral=True, content=f"Ticket fechado por! {interaction.user.mention}")
-            await interaction.channel.edit(archived=True)
+            await interaction.channel.remove_user(interaction.user)
+            await interaction.channel.edit(archived=True, locked=True)
 
-
-async def setup_hook(self) -> None:
-    self.add_view(DropdownView())
 
 
 class Ticket(commands.Cog):
@@ -299,6 +309,17 @@ class Ticket(commands.Cog):
         self.client = client
         self.colour = 0x5865F2
         
+    @commands.Cog.listener()    
+    async def on_ready(self): 
+        if not self.client.persistent_views_added: 
+                # Register the persistent view for listening here. 
+                # Note that this does not send the view to any message. 
+                # To do that, you need to send a message with the View as shown below. 
+                # If you have the message_id you can also pass it as a keyword argument, but for this example 
+                # we don't have one. 
+                self.client.add_view(DropdownView()) 
+                self.client.add_view(CloseButton()) 
+                self.client.persistent_views_added = True
     @slash_command(name = 'setup', description='Setup',guild_ids=[config.guild_id], default_member_permissions=8)
     async def setup(self, interaction: Interaction):
         channel = self.client.get_channel(993529104743804999) # TROCAR PARA CANAL DE SUPORTE
@@ -310,9 +331,7 @@ class Ticket(commands.Cog):
                         value='Para evitar problemas, leia as opções com atenção e lembre-se de tentar pedir ajuda no chat, talvez um de nossos membros ou staffs te ajude. 😉')
         embed.set_image(url='https://i.imgur.com/ea6mqGg.png')
         await interaction.response.send_message('Comando executado com sucesso!', ephemeral=True)
-        await interaction.channel.send(embed=embed)
-        await channel.send(view=DropdownView()) 
-
+        await interaction.channel.send(embed=embed ,view=DropdownView())
 
     @slash_command(guild_ids=[config.guild_id], name="fecharticket",description='Feche um atendimento atual.')
     async def fecharticket(self, interaction: Interaction):

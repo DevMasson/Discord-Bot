@@ -1,7 +1,7 @@
 import nextcord, os, main, datetime, asyncio
 from nextcord import Embed, Interaction, slash_command, Member, SlashOption, ChannelType, ui
 from nextcord.ext import commands
-from main import *
+import config
 from datetime import date, timedelta
 
 
