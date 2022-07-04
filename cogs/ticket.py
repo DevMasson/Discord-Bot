@@ -78,11 +78,16 @@ class StartTicket(ui.View):  # Botao de Atendimento
 
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket para você! {ticket.mention}")
             embed = Embed(title="📩  **|** Seu foi ticket criado!",
-                      description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
+                      description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!', 
                       colour=self.colour)
-
-            await ticket.send(embed=embed, view=CloseButton())
+            
             await ticket.send(f"{interaction.user.mention}")
+            await ticket.send(embed=embed, view=CloseButton())
+            
+            tag = await ticket.send(f"{config.owner_roleID}{config.admin_roleID}{config.sup_roleID}")
+            await asyncio.sleep(1)
+            await tag.delete()
+            
         
         
 
@@ -251,7 +256,6 @@ class BuyButton(ui.View):  # Botao de Sugestão
 
                     return
 
-
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Carrinho de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
@@ -263,9 +267,6 @@ class BuyButton(ui.View):  # Botao de Sugestão
 
             await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
-            
-            
-            
 class CloseButton(ui.View):  # Botao de Sugestão
     def __init__(self):
         super().__init__(timeout=None)
@@ -300,7 +301,7 @@ class Ticket(commands.Cog):
         
     @slash_command(name = 'setup', description='Setup',guild_ids=[config.guild_id], default_member_permissions=8)
     async def setup(self, interaction: Interaction):
-        channel = self.client.get_channel(983506417732452363) # TROCAR PARA CANAL DE SUPORTE
+        channel = self.client.get_channel(993529104743804999) # TROCAR PARA CANAL DE SUPORTE
         embed = Embed(title="Central de Ajuda do Mestre da Noite",
                       description='Nessa seção, você pode tirar suas dúvidas, reportar jogadores, comprar vips ou entrar em contato com a nossa equipe do Mestre da Noite', 
                       colour=self.colour)
