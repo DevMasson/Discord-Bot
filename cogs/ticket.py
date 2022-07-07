@@ -312,11 +312,6 @@ class Ticket(commands.Cog):
     @commands.Cog.listener()    
     async def on_ready(self): 
         if not self.client.persistent_views_added: 
-                # Register the persistent view for listening here. 
-                # Note that this does not send the view to any message. 
-                # To do that, you need to send a message with the View as shown below. 
-                # If you have the message_id you can also pass it as a keyword argument, but for this example 
-                # we don't have one. 
                 self.client.add_view(DropdownView()) 
                 self.client.add_view(CloseButton()) 
                 self.client.persistent_views_added = True
@@ -341,14 +336,5 @@ class Ticket(commands.Cog):
         await interaction.channel.edit(archived=True)
 
 
-
 def setup(client):
     client.add_cog(Ticket(client))
-
-
-
-
-
-
-
-
