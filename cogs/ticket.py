@@ -6,8 +6,6 @@ import config
 import asyncio
 
 
-
-
 class Dropdown(nextcord.ui.Select):
     def __init__(self):
         options = [
@@ -41,16 +39,12 @@ class DropdownView(ui.View):
         super().__init__(timeout=None)
         self.add_item(Dropdown())
 
-
-
 class StartTicket(ui.View):  # Botao de Atendimento
     def __init__(self):
         super().__init__(timeout=None)
         self.value=None
         self.colour = 0x4555ff
 
-        
-        
     @nextcord.ui.button(
         style= nextcord.ButtonStyle.blurple,
         label="➕Abrir Ticket",
@@ -66,35 +60,24 @@ class StartTicket(ui.View):  # Botao de Atendimento
             if f"{interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-
                 else:
                     ticket = False
                     await interaction.response.send_message(ephemeral=True, content="Você já tem um pedido de atendimento em andamento!")
-
                     return
 
 
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Atendimento de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket para você! {ticket.mention}")
             embed = Embed(title="📩  **|** Seu foi ticket criado!",
-                      description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!', 
-                      colour=self.colour)
-            
+                        description='Envie todas as informações possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!', 
+                        colour=self.colour)
             await ticket.send(embed=embed, view=CloseButton())
-            await ticket.send(f"{interaction.user.mention}")
-            
+            await ticket.send(f"{interaction.user.mention}") 
             tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
             await asyncio.sleep(1)
             await tag.delete()
-            
-        
-        
-
-
-
 
 class ReportTicket(ui.View):  # Botao de Report
     def __init__(self):
@@ -102,8 +85,6 @@ class ReportTicket(ui.View):  # Botao de Report
         self.value=None
         self.colour = 0x5c0412
 
-        
-        
     @nextcord.ui.button(
         style= nextcord.ButtonStyle.blurple,
         label="🚨Abrir Denúncia",
@@ -113,35 +94,27 @@ class ReportTicket(ui.View):  # Botao de Report
         self.value = True
         self.stop()
 
-
         ticket = True
         for thread in interaction.channel.threads:
             if f"Ticket de Denúncia de {interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-
                 else:
                     ticket = False
                     await interaction.response.send_message(ephemeral=True, content="Você já tem um ticket de denúncia em andamento!")
-
                     return
-
-
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Ticket de Denúncia de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket para você! {ticket.mention}")
             embed = Embed(title="🚨  **|** Seu pedido de Denúncia foi aberto!",
                       description='Envie todas as informações e provas possíveis sobre seu caso e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-
-            await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
-            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await ticket.send(embed=embed, view=CloseButton())
+            tag = await ticket.send(f"<@&{config.ticket_roleID}>")
             await asyncio.sleep(1)
             await tag.delete()
-
 
 class SuggestionTicket(ui.View):  # Botao de Sugestão
     def __init__(self):
@@ -149,52 +122,43 @@ class SuggestionTicket(ui.View):  # Botao de Sugestão
         self.value=None
         self.colour = 0x9c8203
 
-
-        
-        
     @nextcord.ui.button(
         style= nextcord.ButtonStyle.blurple,
         label="💡 Indicar Sugestão",
-        custom_id="SuguestaoButton:callback",
-     )
+        custom_id="SuguestaoButton:callback"     )
     async def callback(self,button:nextcord.ui.button, interaction: Interaction):
         self.value = True
         self.stop()
-
 
         ticket = True
         for thread in interaction.channel.threads:
             if f"Sugestão de {interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-
                 else:
                     ticket = False
                     await interaction.response.send_message(ephemeral=True, content="Você já tem um ticket de sugestão em andamento!")
-
                     return
 
 
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Sugestão de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-
             await interaction.response.send_message(ephemeral=True,content=f"Criei um ticket de sugestão para você! {ticket.mention}")
             embed = Embed(title="💡   **|** Seu pedido sugestão foi aberto!",
                       description='Envie todas as informações possíveis sobre sua sugestão e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-
-            await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
-
-
+            await ticket.send(embed=embed, view=CloseButton())
+            tag = await ticket.send(f"<@&{config.ticket_roleID}>")
+            await asyncio.sleep(1)
+            await tag.delete()
 
 class BuyButton(ui.View):  # Botao de Sugestão
     def __init__(self):
         super().__init__(timeout=None)
         self.value=None
         self.colour = 0x125200
-
 
     @nextcord.ui.button(
         style= nextcord.ButtonStyle.blurple,
@@ -205,42 +169,34 @@ class BuyButton(ui.View):  # Botao de Sugestão
         self.value = True
         self.stop()
 
-
         ticket = True
         for thread in interaction.channel.threads:
             if f"Carrinho de {interaction.user.name}" in thread.name:
                 if thread.archived:
                     ticket = True
-
                 else:
                     ticket = False
                     await interaction.response.send_message(ephemeral=True, content="Você já tem um carrinho aberto!")
-
                     return
-
 
         if ticket == True:
             ticket = await interaction.channel.create_thread(name=f"Carrinho de {interaction.user.name}",auto_archive_duration=10080)
             await ticket.edit(invitable=False)
-
             await interaction.response.send_message(ephemeral=True,content=f"Criei um carrinho para você! {ticket.mention}")
             embed = Embed(title="🛒   **|** Seu pedido carrinho foi aberto!",
                       description='Envie todas as informações possíveis sobre o que voce quer adquirir e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
-
-            await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
-            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await ticket.send(embed=embed, view=CloseButton())
+            tag = await ticket.send(f"<@&{config.ticket_roleID}>")
             await asyncio.sleep(1)
             await tag.delete()
 
-            print(interaction.data)
 class BuyButton(ui.View):  # Botao de Sugestão
     def __init__(self):
         super().__init__(timeout=None)
         self.value=None
         self.colour = 0x125200
-
 
     @nextcord.ui.button(
         style= nextcord.ButtonStyle.blurple,
@@ -251,7 +207,6 @@ class BuyButton(ui.View):  # Botao de Sugestão
         self.value = True
         self.stop()
 
-
         ticket = True
         for thread in interaction.channel.threads:
             if f"Carrinho de {interaction.user.name}" in thread.name:
@@ -261,7 +216,6 @@ class BuyButton(ui.View):  # Botao de Sugestão
                 else:
                     ticket = False
                     await interaction.response.send_message(ephemeral=True, content="Você já tem um carrinho aberto!")
-
                     return
 
         if ticket == True:
@@ -273,12 +227,12 @@ class BuyButton(ui.View):  # Botao de Sugestão
                       description='Envie todas as informações possíveis sobre o que voce quer adquirir e aguarde até que um atendente responda.\n\nApós a sua questão ser sanada, você pode usar o botão abaixo para encerrar o atendimento!"', 
                       colour=self.colour)
             
-
-            await ticket.send(embed=embed, view=CloseButton())
             await ticket.send(f"{interaction.user.mention}")
-            tag = await ticket.send(f"<@&{config.owner_roleID}><@&{config.admin_roleID}><@&{config.sup_roleID}>")
+            await ticket.send(embed=embed, view=CloseButton())
+            tag = await ticket.send(f"<@&{config.ticket_roleID}>")
             await asyncio.sleep(1)
             await tag.delete()
+
 class CloseButton(ui.View):  # Botao de Sugestão
     def __init__(self):
         super().__init__(timeout=None)
@@ -308,13 +262,14 @@ class Ticket(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.colour = 0x5865F2
-        
+
     @commands.Cog.listener()    
     async def on_ready(self): 
         if not self.client.persistent_views_added: 
                 self.client.add_view(DropdownView()) 
                 self.client.add_view(CloseButton()) 
                 self.client.persistent_views_added = True
+
     @slash_command(name = 'setup', description='Setup',guild_ids=[config.guild_id], default_member_permissions=8)
     async def setup(self, interaction: Interaction):
         channel = self.client.get_channel(993529104743804999) # TROCAR PARA CANAL DE SUPORTE
