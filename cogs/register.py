@@ -19,8 +19,6 @@ class RegisterModal(ui.Modal):
         self.emName2 = ui.TextInput(label = "Nome do Segundo Integrante", min_length= 3, max_length= 17, required= True, placeholder="MSS", style = nextcord.TextInputStyle.short)
         self.add_item(self.emName2)
 
-        self.emName3 = ui.TextInput(label = "Nome do Terceiro Integrante", min_length= 3, max_length= 35, required= True, placeholder="MRL", style = nextcord.TextInputStyle.short)
-        self.add_item(self.emName3)
         
 
         
@@ -28,7 +26,7 @@ class RegisterModal(ui.Modal):
         emclan = self.emClan.value
         emName1 = self.emName1.value
         emName2 = self.emName2.value
-        emName3 = self.emName3.value
+
         
         # guild = self.client.get_guild(config.guild_id)
         # for member in guild.members:
@@ -38,7 +36,7 @@ class RegisterModal(ui.Modal):
 
         embed = Embed(title="**CLAN REGISTRADO ✅**" ,colour=0x5865F2)
         embed.add_field(name='**NOME DO CLAN:**', value=f"{emclan}", inline=False)
-        embed.add_field(name='**INTEGRANTES:**', value=f"🧛🏻・{emName1}\n🧛🏻・{emName2}\n🧛🏻・{emName3}", inline=False)
+        embed.add_field(name='**INTEGRANTES:**', value=f"🧛🏻・{emName1}\n🧛🏻・{emName2}", inline=False)
         await interaction.channel.send(embed=embed)
         
 
