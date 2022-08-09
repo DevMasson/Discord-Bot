@@ -33,5 +33,6 @@ Links
 - [Site do Servidor](https://v-rising.vercel.app)
 
 Coded by:
+------
 - DevMasson
 - Lag0
