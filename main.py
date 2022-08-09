@@ -1,7 +1,7 @@
 import nextcord, config, os, asyncio
 from nextcord.ext import commands
 from nextcord import Object
-from cogs.ticket import DropdownView
+from commands.ticket import DropdownView
 
 
 class Bot(commands.Bot): 
@@ -31,8 +31,8 @@ async def on_ready():
     print("----------------------------")
     
 
-for fn in os.listdir('./cogs'):
-    if fn.endswith('.py'):
-        bot.load_extension(f"cogs.{fn[:-3]}")
+for folder in os.listdir("commands"):
+    if os.path.exists(os.path.join("commands", folder, "cog.py")):
+        bot.load_extension(f"commands.{folder}.cog")
 
 bot.run(config.TOKEN)
