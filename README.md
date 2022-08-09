@@ -31,3 +31,7 @@ Links
 
 - [Servidor Discord](https://discord.gg/mestredanoite)
 - [Site do Servidor](https://v-rising.vercel.app)
+
+Coded by:
+- DevMasson
+- Lag0
